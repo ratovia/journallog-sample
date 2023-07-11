@@ -1,6 +1,6 @@
 import logging
 import logging.config
-from systemd import journal
+from systemd.journal import JournalHandler
 
 logging_config = dict(
     version=1,
@@ -11,7 +11,7 @@ logging_config = dict(
     },
     handlers={
         'journalHandler': {
-            'class': 'journal.journalHandler',
+            'class': 'systemd.journal.JournalHandler',
             'formatter': 'format',
             'level': logging.DEBUG
         }
