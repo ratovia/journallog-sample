@@ -18,11 +18,18 @@ logging_config = dict(
     root={
         'handlers': ['h'],
     },
+    loggers={
+        'journal': {
+            'handlers': ['h'],
+            'level': 'NOTSET',
+            'propagate': False
+        },
+    }
 )
 
 logging.config.dictConfig(logging_config)
 
-logger = logging.getLogger()
+logger = logging.getLogger('journal')
 # logger.addHandler(journal.JournalHandler())
 
 logger.debug('This is debug log')
