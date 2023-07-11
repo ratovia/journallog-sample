@@ -5,7 +5,7 @@ logging_config = dict(
     version=1,
     formatters={
         'f': {'format':
-              '%(asctime)s %(levelname)-8s JOURNAL-LOG-SAMPLE %(message)s'}
+              'APP-LOG-LEVEL:%(levelname)-8s %(message)s'}
     },
     handlers={
         'h': {'class': 'logging.StreamHandler',
@@ -22,8 +22,8 @@ logging.config.dictConfig(logging_config)
 
 logger = logging.getLogger()
 
-logging.debug('Debugging')
-logging.info('Informational')
-logging.warning('Warning')
-logging.error('Error')
-logging.critical('Critical')
+logging.debug('This is debug log')
+logging.info('This is info log')
+logging.warning('This is warn log')
+logging.error('This is err log')
+logging.critical('This is crit log')
