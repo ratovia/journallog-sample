@@ -11,7 +11,7 @@ logging_config = dict(
     },
     handlers={
         'journalHandler': {
-            'class': 'logging.journalHandler',
+            'class': 'journal.journalHandler',
             'formatter': 'format',
             'level': logging.DEBUG
         }
