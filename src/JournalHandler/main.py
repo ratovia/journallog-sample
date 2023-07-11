@@ -1,15 +1,32 @@
-#!/usr/bin/env python
-
 import logging
-from systemd.journal import JournalHandler
+import logging.config
+from systemd import journal
 
-log = logging.getLogger('test')
-log_fmt = logging.Formatter("%(levelname)s %(message)s")
-log_ch = JournalHandler()
-log_ch.setFormatter(log_fmt)
-log.addHandler(log_ch)
-log.setLevel(logging.DEBUG)
-log.warning("warn")
-log.info("info")
-log.error("error")
-log.debug("debug")
+logging_config = dict(
+    version=1,
+    formatters={
+        'format': {
+            'format': 'APP-LOG-LEVEL:%(levelname)-8s %(message)s'
+        }
+    },
+    handlers={
+        'journalHandler': {
+            'class': 'logging.journalHandler',
+            'formatter': 'format',
+            'level': logging.DEBUG
+        }
+    },
+    root={
+        'handlers': ['journalHandler'],
+        'level': logging.DEBUG,
+    },
+)
+
+logging.config.dictConfig(logging_config)
+
+logger = logging.getLogger()
+logger.debug('This is debug log')
+logger.info('This is info log')
+logger.warning('This is warn log')
+logger.error('This is err log')
+logger.critical('This is crit log')
