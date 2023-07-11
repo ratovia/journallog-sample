@@ -5,38 +5,26 @@ from systemd import journal
 logging_config = dict(
     version=1,
     formatters={
-        'f': {
-            'format': 'APP-LOG-LEVEL:%(levelname)-8s %(message)s'
-        }
+        'f': {'format':
+              'APP-LOG-LEVEL:%(levelname)-8s %(message)s'}
     },
     handlers={
-        'journald-myapp': {
-            'class': 'systemd.journal.JournalHandler',
-            'formatter': 'f',
-            'level': 'DEBUG',
-            'SYSLOG_IDENTIFIER': 'myapp',
-        }
+        'h': {'class': 'logging.StreamHandler',
+              'formatter': 'f',
+              'level': logging.DEBUG}
     },
     root={
-        'handlers': ['journald-myapp'],
-        'level': 'NOTSET',
-    },
-    loggers={
-        'myapp': {
-            'handlers': ['journald-myapp'],
-            'level': 'NOTSET',
-            'propagate': False
-        },
+        'handlers': ['h'],
+        'level': logging.DEBUG,
     },
 )
 
 logging.config.dictConfig(logging_config)
 
-logger = logging.getLogger('myapp')
+logger = logging.getLogger()
 logger.addHandler(journal.JournalHandler())
-
-logger.debug('This is debug log')
-logger.info('This is info log')
-logger.warning('This is warn log')
-logger.error('This is err log')
-logger.critical('This is crit log')
+logging.debug('This is debug log')
+logging.info('This is info log')
+logging.warning('This is warn log')
+logging.error('This is err log')
+logging.critical('This is crit log')
