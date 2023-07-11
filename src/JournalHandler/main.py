@@ -1,44 +1,32 @@
 import logging
 import logging.config
-from systemd.journal import JournalHandler
+from systemd import journal
 
-LOGGING_CONFIG = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'level': 'DEBUG',
-            'formatter': 'standard',
-        },
-        'journal': {
-            'class': 'systemd.journal.JournalHandler',
-            'level': 'WARN',
+logging_config = dict(
+    version=1,
+    formatters={
+        'f': {
+            'format': 'APP-LOG-LEVEL:%(levelname)-8s %(message)s'
         }
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'INFO',
-    },
-    'formatters': {
-        'standard': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
-        },
-    },
-    'loggers': {
-        'MyLogger': {
-            'handlers': ['journal'],
-            'level': 'WARN',
+    handlers={
+        'h': {
+            'class': 'journal.JournalHandler',
+            'formatter': 'f'
         }
-    }
-}
+    },
+    root={
+        'handlers': ['h'],
+    },
+)
 
-logging.config.dictConfig(LOGGING_CONFIG)
+logging.config.dictConfig(logging_config)
 
-logger = logging.getLogger('MyLogger')
+logger = logging.getLogger()
+# logger.addHandler(journal.JournalHandler())
 
-logging.debug('This is debug log')
-logging.info('This is info log')
-logging.warning('This is warn log')
-logging.error('This is err log')
-logging.critical('This is crit log')
+logger.debug('This is debug log')
+logger.info('This is info log')
+logger.warning('This is warn log')
+logger.error('This is err log')
+logger.critical('This is crit log')
