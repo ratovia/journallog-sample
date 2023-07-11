@@ -33,7 +33,7 @@ logging_config = dict(
 logging.config.dictConfig(logging_config)
 
 logger = logging.getLogger('myapp')
-# logger.addHandler(journal.JournalHandler())
+logger.addHandler(journal.JournalHandler())
 
 logger.debug('This is debug log')
 logger.info('This is info log')
