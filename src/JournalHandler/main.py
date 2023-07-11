@@ -10,8 +10,8 @@ logging_config = dict(
     },
     handlers={
         'h': {'class': 'journal.JournalHandler',
-              'formatter': 'f',
-              'level': logging.DEBUG}
+              'formatter': 'f'
+              }
     },
     root={
         'handlers': ['h'],
