@@ -1,0 +1,23 @@
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p crit| grep JOURNAL-LOG-SAMPLE
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p err| grep JOURNAL-LOG-SAMPLE
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p warning| grep JOURNAL-LOG-SAMPLE
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p notice| grep JOURNAL-LOG-SAMPLE
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 DEBUG    JOURNAL-LOG-SAMPLE Debugging
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 INFO     JOURNAL-LOG-SAMPLE Informational
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 WARNING  JOURNAL-LOG-SAMPLE Warning
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 ERROR    JOURNAL-LOG-SAMPLE Error
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 CRITICAL JOURNAL-LOG-SAMPLE Critical
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p info| grep JOURNAL-LOG-SAMPLE
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 DEBUG    JOURNAL-LOG-SAMPLE Debugging
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 INFO     JOURNAL-LOG-SAMPLE Informational
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 WARNING  JOURNAL-LOG-SAMPLE Warning
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 ERROR    JOURNAL-LOG-SAMPLE Error
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 CRITICAL JOURNAL-LOG-SAMPLE Critical
+cafe01@ubuntu:~/workspace/journallog-sample$ journalctl -b -p debug| grep JOURNAL-LOG-SAMPLE
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 DEBUG    JOURNAL-LOG-SAMPLE Debugging
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,891 INFO     JOURNAL-LOG-SAMPLE Informational
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 WARNING  JOURNAL-LOG-SAMPLE Warning
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 ERROR    JOURNAL-LOG-SAMPLE Error
+Jul 11 10:43:21 ubuntu JournalSample[2888]: 2023-07-11 10:43:21,892 CRITICAL JOURNAL-LOG-SAMPLE Critical
+cafe01@ubuntu:~/workspace/journallog-sample$
+
