@@ -1,30 +1,39 @@
 import logging
 import logging.config
-from systemd import journal
+from systemd.journal import JournalHandler
 
-# logging_config = dict(
-#     version=1,
-#     formatters={
-#         'f': {'format':
-#               'APP-LOG-LEVEL:%(levelname)-8s %(message)s'}
-#     },
-#     handlers={
-#         'h': {'class': 'logging.StreamHandler',
-#               'formatter': 'f',
-#               'level': logging.DEBUG}
-#     },
-#     root={
-#         'handlers': ['h'],
-#         'level': logging.DEBUG,
-#     },
-# )
+# ログ設定辞書
+logging_config = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+        }
+    },
+    "handlers": {
+        "journal": {
+            "class": "systemd.journal.JournalHandler",
+            "level": "DEBUG",
+            "formatter": "standard"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["journal"],
+            "level": "DEBUG",
+            "propagate": True
+        }
+    }
+}
 
-# logging.config.dictConfig(logging_config)
+# ログ設定の適用
+logging.config.dictConfig(logging_config)
 
-logger = logging.getLogger()
-logger.addHandler(journal.JournalHandler())
-logger.debug('This is debug log')
-logger.info('This is info log')
-logger.warning('This is warn log')
-logger.error('This is err log')
-logger.critical('This is crit log')
+# ログメッセージの記録
+logger = logging.getLogger(__name__)
+logger.debug('This is a debug message')
+logger.info('This is an info message')
+logger.warning('This is a warning message')
+logger.error('This is an error message')
+logger.critical('This is a critical message')
