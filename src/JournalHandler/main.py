@@ -10,26 +10,29 @@ logging_config = dict(
         }
     },
     handlers={
-        'h': {
-            'class': 'journal.JournalHandler',
-            'formatter': 'f'
+        'journald-myapp': {
+            'class': 'systemd.journal.JournalHandler',
+            'formatter': 'f',
+            'level': 'DEBUG',
+            'SYSLOG_IDENTIFIER': 'myapp',
         }
     },
     root={
-        'handlers': ['h'],
+        'handlers': ['journald-myapp'],
+        'level': 'NOTSET',
     },
     loggers={
-        'journal': {
-            'handlers': ['h'],
+        'myapp': {
+            'handlers': ['journald-myapp'],
             'level': 'NOTSET',
             'propagate': False
         },
-    }
+    },
 )
 
 logging.config.dictConfig(logging_config)
 
-logger = logging.getLogger('journal')
+logger = logging.getLogger('myapp')
 # logger.addHandler(journal.JournalHandler())
 
 logger.debug('This is debug log')
