@@ -1,27 +1,41 @@
 import logging
 import logging.config
-from systemd import journal
+from systemd.journal import JournalHandler
 
-logging_config = dict(
-    version=1,
-    formatters={
-        'f': {'format':
-              'APP-LOG-LEVEL:%(levelname)-8s %(message)s'}
+LOGGING_CONFIG = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'formatter': 'standard',
+        },
+        'journal': {
+            'class': 'systemd.journal.JournalHandler',
+            'level': 'WARN',
+        }
     },
-    handlers={
-        'h': {'class': 'journal.JournalHandler',
-              'formatter': 'f'
-              }
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
     },
-    root={
-        'handlers': ['h'],
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
     },
-)
+    'loggers': {
+        'MyLogger': {
+            'handlers': ['journal'],
+            'level': 'WARN',
+        }
+    }
+}
 
-logging.config.dictConfig(logging_config)
+logging.config.dictConfig(LOGGING_CONFIG)
 
-logger = logging.getLogger()
-# logger.addHandler(journal.JournalHandler())
+logger = logging.getLogger('MyLogger')
 
 logging.debug('This is debug log')
 logging.info('This is info log')
