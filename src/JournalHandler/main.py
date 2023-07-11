@@ -1,11 +1,15 @@
-import logging
-from systemd import journal
-logger = logging.getLogger('custom_logger_name')
-logger.addHandler(journal.JournalHandler(SYSLOG_IDENTIFIER='custom_unit_name'))
-logger.warning("Some message: %s", 'detail')
+#!/usr/bin/env python
 
-logger.debug('This is a debug message')
-logger.info('This is an info message')
-logger.warning('This is a warning message')
-logger.error('This is an error message')
-logger.critical('This is a critical message')
+import logging
+from systemd.journal import JournalHandler
+
+log = logging.getLogger('test')
+log_fmt = logging.Formatter("%(levelname)s %(message)s")
+log_ch = JournalHandler()
+log_ch.setFormatter(log_fmt)
+log.addHandler(log_ch)
+log.setLevel(logging.DEBUG)
+log.warning("warn")
+log.info("info")
+log.error("error")
+log.debug("debug")
