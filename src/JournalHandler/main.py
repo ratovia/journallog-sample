@@ -9,7 +9,7 @@ logging_config = dict(
               'APP-LOG-LEVEL:%(levelname)-8s %(message)s'}
     },
     handlers={
-        'h': {'class': 'logging.StreamHandler',
+        'h': {'class': 'journal.JournalHandler',
               'formatter': 'f',
               'level': logging.DEBUG}
     },
@@ -22,7 +22,7 @@ logging_config = dict(
 logging.config.dictConfig(logging_config)
 
 logger = logging.getLogger()
-logger.addHandler(journal.JournalHandler())
+# logger.addHandler(journal.JournalHandler())
 
 logging.debug('This is debug log')
 logging.info('This is info log')
